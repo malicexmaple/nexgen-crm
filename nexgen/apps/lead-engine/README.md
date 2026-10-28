@@ -25,6 +25,16 @@ A Twenty app that turns Google Maps into a cold-call list:
 - **Re-score existing companies:** workflow action **Audit websites**, or `POST /s/nexgen/audit-companies` with `{"companyIds": [...]}`.
 - **Build pitch sites on demand:** workflow action **Build pitch sites**, or `POST /s/nexgen/generate-pitch-sites` with `{"companyIds": [...]}`.
 
+## Installing on the live CRM
+
+Sign in to the CRM, create an API key (Settings → Developers → API keys, role Admin), then from Windows PowerShell:
+
+```powershell
+wsl -u root -- bash /mnt/c/Users/R9AMD/nexgen-crm/nexgen/apps/lead-engine/scripts/install-on-railway.sh
+```
+
+It asks for the key once (input hidden), installs the app, and on later runs just updates it.
+
 ## Developing
 
 App tooling is Linux/macOS only; on Windows use WSL. Node 24.5+ and Yarn 4 (Corepack).
