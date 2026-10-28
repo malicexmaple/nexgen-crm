@@ -1,3 +1,4 @@
+import { APP_BRAND_NAME } from '@/branding/constants/AppBrandName';
 import { t } from '@lingui/core/macro';
 import { AI_MODEL_TIERS, type AiModelTier } from 'twenty-shared/ai';
 import { Section } from 'twenty-ui/components/layout';
@@ -60,7 +61,7 @@ export const SettingsAiModelsTab = () => {
             <SettingsOptionCardContentSelect
               Icon={IconMessage}
               title={t`AI chat`}
-              description={t`Model used when you chat with Twenty`}
+              description={t`Model used when you chat with ${APP_BRAND_NAME}`}
               divider
             >
               <Select
@@ -89,7 +90,7 @@ export const SettingsAiModelsTab = () => {
           <SettingsOptionCardContentSwitch
             Icon={IconWand}
             title={t`Choose automatically`}
-            description={t`Twenty fills each level with the best model that meets your requirements`}
+            description={t`${APP_BRAND_NAME} fills each level with the best model that meets your requirements`}
             checked={isAutoModelSelectionEnabled}
             onChange={handleAutoModelSelectionToggle}
           />

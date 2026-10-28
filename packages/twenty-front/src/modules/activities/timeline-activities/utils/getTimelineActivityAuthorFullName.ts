@@ -1,6 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { type TimelineActivity } from '@/activities/timeline-activities/types/TimelineActivity';
 import { type CurrentWorkspaceMember } from '@/auth/states/currentWorkspaceMemberState';
+import { APP_BRAND_NAME } from '@/branding/constants/AppBrandName';
 import { isDefined } from 'twenty-shared/utils';
 
 export const getTimelineActivityAuthorFullName = (
@@ -12,5 +13,5 @@ export const getTimelineActivityAuthorFullName = (
       ? t`You`
       : `${event.workspaceMember?.name.firstName} ${event.workspaceMember?.name.lastName}`;
   }
-  return 'Twenty';
+  return APP_BRAND_NAME;
 };

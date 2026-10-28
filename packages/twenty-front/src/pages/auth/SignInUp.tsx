@@ -1,4 +1,5 @@
 import { StyledAuthContent } from '@/auth/components/StyledAuthContent';
+import { APP_BRAND_NAME } from '@/branding/constants/AppBrandName';
 import { useSignInUp } from '@/auth/sign-in-up/hooks/useSignInUp';
 import { useSignInUpForm } from '@/auth/sign-in-up/hooks/useSignInUpForm';
 import { isCreatingWorkspaceState } from '@/auth/states/isCreatingWorkspaceState';
@@ -122,7 +123,7 @@ export const SignInUp = () => {
     }
 
     if (isGlobalScope) {
-      return t`Welcome to Twenty`;
+      return t`Welcome to ${APP_BRAND_NAME}`;
     }
 
     const workspaceName = workspacePublicData?.displayName;

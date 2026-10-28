@@ -1,3 +1,4 @@
+import { APP_BRAND_NAME } from '@/branding/constants/AppBrandName';
 import { styled } from '@linaria/react';
 import { t } from '@lingui/core/macro';
 import { isDefined } from 'twenty-shared/utils';
@@ -106,7 +107,7 @@ export const SettingsAiModelTiersPreview = () => {
                       ? t`No model is available for this mode.`
                       : tier.isPinned
                         ? t`Manually selected for this mode.`
-                        : t`Automatically selected by Twenty for this mode.`
+                        : t`Automatically selected by ${APP_BRAND_NAME} for this mode.`
                   }
                 >
                   <StyledMode tabIndex={0}>
