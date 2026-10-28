@@ -4,7 +4,7 @@
 #   wsl -u root -- bash /mnt/c/Users/R9AMD/nexgen-crm/nexgen/apps/lead-engine/scripts/install-on-railway.sh
 set -euo pipefail
 
-CRM_URL=${1:-https://nexgen-server-production.up.railway.app}
+CRM_URL=${1:-https://nexgen-crm-6v08q1pa.up.railway.app}
 cd "$(dirname "$0")/.."
 
 # Prefer the Node 24 set up in WSL for this project; the app tooling needs Node 24.5+.
