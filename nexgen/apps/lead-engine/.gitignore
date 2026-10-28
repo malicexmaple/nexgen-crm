@@ -1,0 +1,9 @@
+/node_modules
+.yarn/*
+!.yarn/releases
+generated
+/coverage
+/dist/
+.twenty
+.env*
+*.tsbuildinfo
