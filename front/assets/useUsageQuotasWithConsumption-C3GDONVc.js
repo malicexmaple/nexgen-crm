@@ -1,0 +1,1 @@
+import{go as a}from"./graphql-BF74bK1D.js";import{t as u}from"./useQuery-CoVTqM6Q.js";var e=()=>{const{data:o,loading:t,error:s}=u(a);return{usageQuotasWithConsumption:o?.usageQuotasWithConsumption??[],loading:t,error:s}};export{e as t};

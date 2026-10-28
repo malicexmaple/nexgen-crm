@@ -1,0 +1,1 @@
+import{t as a}from"./dist-DM-aCDeX.js";import{m as e}from"./theme-CuGIQBsJ-EnL4YnNw.js";var o=()=>({hasDangerBorder:r})=>e.border.color[r?"danger":"medium"],s=()=>({borderRadius:r})=>e.border.radius[r??"md"],m=a("div")({name:"OverlayContainer",class:"olkjhse",propsAsIs:!1,vars:{"olkjhse-0":[o()],"olkjhse-1":[s()]}});export{m as t};

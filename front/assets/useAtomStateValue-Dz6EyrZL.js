@@ -1,0 +1,1 @@
+import{o as r}from"./chunk-ChpBd9eV.js";import{t as a}from"./react-M6yZRsSc.js";import{c as m}from"./routedFlowStateScopeRegistry-DGhefLBQ.js";var e=r(a(),1),u=(0,e.createContext)(null),s=()=>(0,e.useContext)(u),S=t=>{const o=s();return m(t.type==="State"?t.getAtom(o):t.atom)};export{u as n,s as r,S as t};

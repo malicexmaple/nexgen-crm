@@ -1,0 +1,1 @@
+import{t as r}from"./dist-Cg5OofxW.js";var t=a=>{switch(a){case"extraFast":return r._({id:"4NR4Ja"});case"fast":return r._({id:"KziH2K"});case"balanced":return r._({id:"kJygHz"});case"smart":return r._({id:"ZKXQ0a"});case"extraSmart":return r._({id:"Y64TrM"})}};export{t};

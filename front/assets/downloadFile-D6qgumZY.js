@@ -1,0 +1,1 @@
+import{t as i}from"./dist-Cg5OofxW.js";import{t as a}from"./FileSaver.min-D8cZh_RN.js";var o=a(),s=(r,t)=>fetch(r).then(e=>e.status===200?e.blob():Promise.reject(i._({id:"hGfbkg"}))).then(e=>{(0,o.saveAs)(e,t)});export{s as t};

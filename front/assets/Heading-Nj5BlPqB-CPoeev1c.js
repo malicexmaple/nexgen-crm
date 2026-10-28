@@ -1,0 +1,1 @@
+import{t as m}from"./useRender-zpu_0T94.js";import{t as i}from"./clsx-DWz4Q8_5.js";var l={heading:"_heading_t1hsp_1"},n=({level:e=2,size:a="md",color:r="primary",render:s,ref:d,className:o,...t})=>m({defaultTagName:`h${e}`,render:s,ref:d,props:{...t,"data-size":a,"data-color":r,className:i(l.heading,o)}});export{n as t};

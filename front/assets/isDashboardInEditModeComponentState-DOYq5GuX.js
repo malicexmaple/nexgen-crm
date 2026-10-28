@@ -1,0 +1,1 @@
+import{r as t}from"./useAvailableComponentInstanceIdOrThrow-fK7iVskG.js";import{t as o}from"./PageLayoutComponentInstanceContext-DQ_cljqH.js";var n=t({key:"isDashboardInEditModeComponentState",defaultValue:!1,componentInstanceContext:o});export{n as t};

@@ -1,0 +1,1 @@
+import{t as o}from"./useAtomStateValue-Dz6EyrZL.js";import{t as i}from"./currentWorkspaceState-DahEPtKG.js";import{i as e}from"./AppChip-EsumGI0t.js";import{t as s}from"./isWorkspaceCustomApplication-maRvZl_T.js";import{n as a,r as p}from"./getApplicationDescriptionSummary-CB-CruXs.js";var d=t=>{const r=o(i);return e(t)?a():s(t,r)?p():t?.description??""};export{d as t};

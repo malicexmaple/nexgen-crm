@@ -1,0 +1,1 @@
+import{t as m}from"./jsx-runtime-BmDUFisN.js";import{t as e}from"./build-CngeiE9P.js";import{t as o}from"./isDefined-Dtu5EYqP-_d6Dqdoe.js";import{t as a}from"./dist-Cg5OofxW.js";var n=m(),u=e(),f=({name:i,onClick:r})=>{if(!o(r))return;const t=i?.trim();return(0,n.jsx)("button",{type:"button","aria-label":(0,u.isNonEmptyString)(t)?t:a._({id:"kfcRb0"}),onClick:r})};export{f as t};

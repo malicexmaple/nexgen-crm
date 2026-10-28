@@ -1,0 +1,1 @@
+import{t as r}from"./isDefined-Dtu5EYqP-_d6Dqdoe.js";import{gi as t}from"./graphql-BF74bK1D.js";var s=i=>r(i)&&i!==t.OPEN,l=({objectPermissions:i,objectMetadataItem:a})=>r(i)&&!i.canUpdateObjectRecords||r(a)&&(!a.isUIEditable||a.isRemote||s(a.writability));export{s as n,l as t};

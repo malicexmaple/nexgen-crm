@@ -1,0 +1,1 @@
+import{t as i}from"./dist-Cg5OofxW.js";var t=d=>({none:i._({id:"EdQY6l"}),minimal:i._({id:"8GG+Pa"}),low:i._({id:"nTWWCZ"}),medium:i._({id:"agPptk"}),high:i._({id:"yx/fMc"}),xhigh:i._({id:"Psyj/F"}),max:i._({id:"CK1KXz"})})[d];export{t};

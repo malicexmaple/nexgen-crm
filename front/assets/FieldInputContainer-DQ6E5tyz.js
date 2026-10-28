@@ -1,0 +1,1 @@
+import{t as e}from"./dist-DM-aCDeX.js";var i=s=>{const[t="",...a]=s.trim().split(/\s+/);return[t,a.join(" ")]},l=e("div")({name:"FieldInputContainer",class:"f8qm5w4",propsAsIs:!1});export{i as n,l as t};

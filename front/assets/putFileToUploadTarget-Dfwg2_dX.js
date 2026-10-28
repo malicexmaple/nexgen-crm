@@ -1,0 +1,1 @@
+import{t as r}from"./dist-Cg5OofxW.js";var n=async({file:o,uploadTarget:t,signal:a})=>{const e=await fetch(t.uploadUrl,{method:"PUT",headers:{"Content-Type":t.contentType},body:o,credentials:"same-origin",signal:a});if(!e.ok)throw new Error(r._({id:"WPiFwT",values:{0:e.status}}))};export{n as t};

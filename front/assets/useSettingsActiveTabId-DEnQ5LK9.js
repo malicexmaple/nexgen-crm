@@ -1,0 +1,1 @@
+import{v as n}from"./chunk-OB3PAWPO-CVMpTOxq.js";import{t as s}from"./isDefined-Dtu5EYqP-_d6Dqdoe.js";import{t as i}from"./useAtomComponentStateValue-BuZedK_v.js";import{t as m}from"./activeTabIdComponentState-CL4Yu4wx.js";var l=(a,t)=>{const e=i(m,a),{hash:r}=n(),o=r.replace("#","");return t.includes(o)?o:s(e)&&t.includes(e)?e:t[0]??null};export{l as t};

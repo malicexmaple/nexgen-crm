@@ -1,0 +1,1 @@
+import{o as r}from"./chunk-ChpBd9eV.js";import{t as e}from"./react-M6yZRsSc.js";import{n as l}from"./capitalize-DFPVt1IM-CyPrrB5u.js";import{t as n}from"./useApolloClient-zMx7IuLG.js";var t=r(e(),1),a=(0,t.createContext)(null),m=()=>{const o=(0,t.useContext)(a);if(n(),!o)throw new Error(l("ApolloCoreClient not found"));return o};export{a as n,m as t};

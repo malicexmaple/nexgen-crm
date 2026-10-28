@@ -1,0 +1,1 @@
+import{t as r}from"./jsx-runtime-BmDUFisN.js";import{t as a}from"./dist-DM-aCDeX.js";import{t as s}from"./ObjectMetadataIcon-DS7Kylml.js";var t=r(),o=a("div")({name:"StyledObjectIconContainer",class:"s9v6p02",propsAsIs:!1}),m=({objectMetadataItem:e})=>(0,t.jsx)(o,{children:(0,t.jsx)(s,{objectMetadataItem:e})});export{m as t};

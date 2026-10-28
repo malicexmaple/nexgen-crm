@@ -1,0 +1,1 @@
+import{r as o}from"./useAvailableComponentInstanceIdOrThrow-fK7iVskG.js";import{n as t}from"./flowComponentState-D1JDM3NO.js";var r=o({key:"workflowVisualizerWorkflowVersionIdComponentState",defaultValue:void 0,componentInstanceContext:t});export{r as t};

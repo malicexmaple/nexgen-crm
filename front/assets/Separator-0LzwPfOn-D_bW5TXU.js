@@ -1,0 +1,1 @@
+import{t}from"./jsx-runtime-BmDUFisN.js";import{E as a}from"./owner-qIOaRUsv.js";import{o as s}from"./useScrollLock-DmKww44d.js";var m=t(),e={root:"_root_vfe8j_1"},x=({className:r,...o})=>(0,m.jsx)(s,{...o,className:a(e.root,r)});export{x as t};

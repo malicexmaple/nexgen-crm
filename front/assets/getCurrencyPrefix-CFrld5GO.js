@@ -1,0 +1,1 @@
+import{t as c}from"./build-CngeiE9P.js";var i=c(),u=n=>{const e=n.toUpperCase();try{const t=new Intl.NumberFormat("en-US",{style:"currency",currency:e}).formatToParts(0).filter(r=>r.type==="currency"||r.type==="literal").map(r=>r.value).join("");return(0,i.isNonEmptyString)(t)?t:e}catch{return e}};export{u as t};

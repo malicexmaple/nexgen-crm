@@ -1,0 +1,1 @@
+import{t as e}from"./createReactComponent-CmedsHsX.js";var h=[["path",{d:"M10 3h4v4h-4l0 -4",key:"svg-0"}],["path",{d:"M3 17h4v4h-4l0 -4",key:"svg-1"}],["path",{d:"M17 17h4v4h-4l0 -4",key:"svg-2"}],["path",{d:"M7 17l5 -4l5 4",key:"svg-3"}],["path",{d:"M12 7l0 6",key:"svg-4"}]],t=e("outline","hierarchy-2","Hierarchy2",h);export{t};

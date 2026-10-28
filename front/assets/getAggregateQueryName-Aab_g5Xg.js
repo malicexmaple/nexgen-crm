@@ -1,0 +1,1 @@
+import{t}from"./isDefined-Dtu5EYqP-_d6Dqdoe.js";import{n as e,t as a}from"./capitalize-DFPVt1IM-CyPrrB5u.js";var i=r=>{if(!t(r))throw new Error(e("objectMetadataNamePlural is required"));return e(`Aggregate${a(r)}`)};export{i as t};

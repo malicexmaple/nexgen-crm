@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-BmDUFisN.js";import{t as r}from"./dist-Cg5OofxW.js";import{i}from"./layout-4nLOjbJA-Df6cWFLP.js";import{t as o}from"./SettingsAccountsListEmptyStateCard-CFVLZxJ8.js";var t=e(),c=()=>(0,t.jsxs)(i.Root,{children:[(0,t.jsx)(i.Header,{title:r._({id:"Kcr9Fr"}),description:r._({id:"D8ATlr"})}),(0,t.jsx)(o,{})]});export{c as t};

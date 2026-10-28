@@ -1,0 +1,1 @@
+import{o as i}from"./chunk-ChpBd9eV.js";import{t as s}from"./react-M6yZRsSc.js";var c="sse-client-reconnected",E=i(s(),1),_=({onBrowserEvent:t,eventName:e})=>{(0,E.useEffect)(()=>{const r=o=>{const n=o.detail;t(n)};return window.addEventListener(e,r),()=>{window.removeEventListener(e,r)}},[e,t])};export{c as n,_ as t};

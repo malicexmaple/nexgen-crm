@@ -1,0 +1,1 @@
+var e=["button",'input[type="button"]','input[type="submit"]','input[type="reset"]','input[type="image"]','[role="button"]',"a[href]",'[role="link"]'].join(", "),n=t=>t.target instanceof Element&&t.target.matches(e);export{n as t};

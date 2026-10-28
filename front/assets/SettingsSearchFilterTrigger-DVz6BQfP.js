@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-BmDUFisN.js";import{t as o}from"./IconFilter-BwWK91j4.js";import{r as s}from"./dist-C0k9q2wC.js";import{o as a,r as m}from"./Dropdown-D3LPyrQI-CFN_qJv-.js";var r=e(),x=({ariaLabel:i})=>{const{i18n:t,_:n}=s();return(0,r.jsx)(a.Trigger,{render:(0,r.jsx)(m,{"aria-label":i??t._({id:"o7J4JM"}),children:(0,r.jsx)(o,{})})})};export{x as t};

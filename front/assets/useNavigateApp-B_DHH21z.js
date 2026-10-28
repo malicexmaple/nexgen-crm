@@ -1,0 +1,1 @@
+import{o}from"./chunk-ChpBd9eV.js";import{t as u}from"./react-M6yZRsSc.js";import{Cr as m,P as l}from"./utils-C2me6AkW-CmNSg6P4.js";var t=o(u(),1),v=(0,t.createContext)(null),f=()=>{const r=(0,t.useContext)(v);return(0,t.useCallback)((p,s,c,a)=>{l(r);const e=m(p,s,c);if(a?.replace===!0){r.replace(e,a.state,a);return}r.push(e,a?.state,a)},[r])};export{v as n,f as t};

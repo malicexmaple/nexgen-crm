@@ -1,0 +1,1 @@
+import{t as i}from"./jsx-runtime-BmDUFisN.js";import{s as m}from"./data-display-CHKKTmH_-BoiXHhcV.js";import{p as n}from"./theme-CuGIQBsJ-EnL4YnNw.js";var p=i(),x=({Icon:o,color:t,size:e,stroke:s})=>{const r=n();return(0,p.jsx)(o,{size:e??r.icon.size.md,stroke:s??r.icon.stroke.md,color:m(t).iconColor})};export{x as t};

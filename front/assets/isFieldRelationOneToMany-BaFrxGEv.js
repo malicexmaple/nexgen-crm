@@ -1,0 +1,1 @@
+import{Pi as o}from"./graphql-BF74bK1D.js";import{a as e}from"./getRecordFromRecordNode-zQQiaYrY.js";import{t as i}from"./isFieldRelation-B8398UPa.js";var l=a=>e(a)&&a.metadata.relationType===o.ONE_TO_MANY,p=a=>i(a)&&a.metadata.relationType===o.ONE_TO_MANY;export{l as n,p as t};

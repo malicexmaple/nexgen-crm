@@ -1,0 +1,1 @@
+import{o as t}from"./chunk-ChpBd9eV.js";import{t as r}from"./react-M6yZRsSc.js";import{n as e}from"./capitalize-DFPVt1IM-CyPrrB5u.js";import{t as i}from"./useApolloClient-zMx7IuLG.js";import{Jo as n}from"./index-BpXnuP3g.js";var l=t(r(),1),f=()=>{const o=(0,l.useContext)(n);if(i(),!o)throw new Error(e("ApolloAdminClient not found"));return o};export{f as t};

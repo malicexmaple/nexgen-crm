@@ -1,0 +1,1 @@
+import{o as i}from"./chunk-ChpBd9eV.js";import{t as n}from"./react-M6yZRsSc.js";var e=i(n(),1);function v({controlled:t,default:r,name:f,state:l="value"}){const{current:a}=e.useRef(t!==void 0),[o,s]=e.useState(()=>r);return[a&&t!==void 0?t:o,e.useCallback(u=>{a||s(u)},[])]}export{v as t};

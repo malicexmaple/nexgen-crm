@@ -1,0 +1,1 @@
+import{t as o}from"./jsx-runtime-BmDUFisN.js";import{n as t}from"./OverflowingTextWithTooltip-Cky5WlIk-DG5ZAfND.js";import{l as i}from"./Button-Dd8cNsn1-DoSbgVYU.js";var m=o(),p=({mode:r,children:e})=>(0,m.jsx)(t.Provider,{value:r,children:e}),v=r=>i(r).text;export{p as n,v as t};

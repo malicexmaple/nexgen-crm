@@ -1,0 +1,1 @@
+import{o as t}from"./chunk-ChpBd9eV.js";import{t as o}from"./react-M6yZRsSc.js";import{c as r}from"./useNavigateSidePanel-Cv0TMQnp.js";var i=t(o(),1),m=e=>{(0,i.useEffect)(()=>(window.addEventListener(r,e),()=>{window.removeEventListener(r,e)}),[e])};export{m as t};

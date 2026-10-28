@@ -1,0 +1,1 @@
+import{o}from"./chunk-ChpBd9eV.js";import{t as r}from"./react-M6yZRsSc.js";import{t as s}from"./isDefined-Dtu5EYqP-_d6Dqdoe.js";import{t as a}from"./useSetAtomState-Codokl4a.js";import{i as c}from"./updateMessageChannel-C2dVBAV9.js";var i=o(r(),1),p=({messageChannel:t})=>{const e=a(c);return(0,i.useEffect)(()=>{s(t)&&e(t)},[t,e]),null};export{p as t};

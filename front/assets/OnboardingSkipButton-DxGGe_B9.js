@@ -1,0 +1,1 @@
+import{t as n}from"./jsx-runtime-BmDUFisN.js";import{r as o}from"./Button-Dd8cNsn1-DoSbgVYU.js";import{r as a}from"./dist-C0k9q2wC.js";var _=n(),p=({onClick:r,disabled:i})=>{const{i18n:t,_:e}=a();return(0,_.jsx)(o,{variant:"outline",onClick:r,disabled:i,children:t._({id:"6Uau97"})})};export{p as t};

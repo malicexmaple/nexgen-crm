@@ -1,0 +1,1 @@
+import{t}from"./build-CngeiE9P.js";import{in as o}from"./utils-C2me6AkW-CmNSg6P4.js";import{t as i}from"./config-B1E7I59J.js";var m=t(),p=r=>(0,m.isNonEmptyString)(r)?o({imageUrl:r,baseUrl:i}):void 0;export{p as t};

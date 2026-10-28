@@ -1,0 +1,1 @@
+import{d as r,l as o}from"./types-CAaG6HAM-CuhXx7FV.js";var i=t=>{const e={id:`${t}-default-group`,logicalOperator:r.AND};return{stepFilterGroups:[e],stepFilters:[{id:`${t}-default-rule`,type:"BOOLEAN",stepOutputKey:t,operand:o.IS,value:"false",stepFilterGroupId:e.id,positionInStepFilterGroup:0}]}};export{i as t};
