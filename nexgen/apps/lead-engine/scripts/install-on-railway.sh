@@ -16,10 +16,28 @@ export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 command -v twenty >/dev/null || npm install -g twenty@2.51.3 --no-fund --no-audit
 corepack yarn install
 
-if ! twenty auth list 2>/dev/null | grep -q production; then
-  echo "Create an API key in the CRM: Settings -> Developers -> API keys -> Create (role Admin)."
-  read -rsp "Paste the API key for $CRM_URL: " api_key
+WINDOWS_POWERSHELL=/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
+API_KEY_PATTERN='^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$'
+
+# Terminals can wrap pasted text in invisible bracketed-paste markers, which the server rejects.
+clean_api_key() {
+  local key=${1//$'\e[200~'/}
+  key=${key//$'\e[201~'/}
+  printf '%s' "$key" | tr -cd 'A-Za-z0-9._-'
+}
+
+if ! twenty auth status --remote production >/dev/null 2>&1; then
+  echo "Create an API key in the CRM (Settings -> Developers -> Create API key, role Admin) and copy it."
+  read -rsp "Press Enter once the key is copied. " _
   echo
+  api_key=""
+  [ -x "$WINDOWS_POWERSHELL" ] && api_key=$(clean_api_key "$("$WINDOWS_POWERSHELL" -NoProfile -Command Get-Clipboard 2>/dev/null || true)")
+  if ! [[ $api_key =~ $API_KEY_PATTERN ]]; then
+    read -rsp "Could not read a key from the clipboard. Paste it here and press Enter: " pasted_key
+    echo
+    api_key=$(clean_api_key "$pasted_key")
+  fi
+  echo "Using a ${#api_key}-character key."
   printf '%s' "$api_key" | twenty auth login --with-token --url "$CRM_URL" --name production --no-input
 fi
 

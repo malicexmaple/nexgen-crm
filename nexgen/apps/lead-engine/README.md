@@ -33,7 +33,7 @@ Sign in to the CRM, create an API key (Settings → Developers → API keys, rol
 wsl -u root -- bash /mnt/c/Users/R9AMD/nexgen-crm/nexgen/apps/lead-engine/scripts/install-on-railway.sh
 ```
 
-It asks for the key once (input hidden), installs the app, and on later runs just updates it.
+Copy the key, then press Enter when it asks: it reads the key from the Windows clipboard (falling back to a hidden paste prompt), installs the app, and on later runs just updates it.
 
 ## Developing
 
