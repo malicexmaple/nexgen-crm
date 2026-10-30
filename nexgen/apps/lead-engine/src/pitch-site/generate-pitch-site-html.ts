@@ -6,7 +6,7 @@ import {
   PITCH_SITE_SYSTEM_PROMPT,
 } from 'src/pitch-site/build-pitch-site-prompt';
 import { type BrandKit } from 'src/pitch-site/fetch-brand-kit';
-import { type BusinessPhoto } from 'src/pitch-site/fetch-business-photos';
+import { type GoogleListing } from 'src/pitch-site/fetch-google-listing';
 import {
   addPitchSiteSafetyTags,
   sanitizePitchSiteHtml,
@@ -32,13 +32,13 @@ export const generatePitchSiteHtml = async ({
   model,
   company,
   brandKit,
-  googlePhotos,
+  googleListing,
 }: {
   apiKey: string;
   model: string;
   company: LeadCompany;
   brandKit: BrandKit | null;
-  googlePhotos: BusinessPhoto[];
+  googleListing: GoogleListing;
 }): Promise<string> => {
   const client = new Anthropic({ apiKey });
   const supportsFallback = FALLBACK_CAPABLE_MODELS.has(model);
@@ -50,7 +50,7 @@ export const generatePitchSiteHtml = async ({
     output_config: { effort: 'high' },
     system: PITCH_SITE_SYSTEM_PROMPT,
     messages: [
-      { role: 'user', content: buildPitchSiteContent(company, { brandKit, googlePhotos }) },
+      { role: 'user', content: buildPitchSiteContent(company, { brandKit, googleListing }) },
     ],
     ...(supportsFallback
       ? { betas: ['server-side-fallback-2026-07-01'], fallbacks: 'default' }

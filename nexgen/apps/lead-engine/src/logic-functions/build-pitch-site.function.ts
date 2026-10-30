@@ -13,7 +13,7 @@ import {
   getRequiredSetting,
 } from 'src/logic-functions/utils/settings';
 import { fetchBrandKit } from 'src/pitch-site/fetch-brand-kit';
-import { fetchBusinessPhotos } from 'src/pitch-site/fetch-business-photos';
+import { fetchGoogleListing } from 'src/pitch-site/fetch-google-listing';
 import { generatePitchSiteHtml } from 'src/pitch-site/generate-pitch-site-html';
 import {
   buildPitchSiteUrl,
@@ -39,17 +39,17 @@ const handler = async (input: unknown) => {
   const built: string[] = [];
 
   for (const company of companies) {
-    const [brandKit, googlePhotos] = await Promise.all([
+    const [brandKit, googleListing] = await Promise.all([
       fetchBrandKit({
         websiteUrl: company.domainName?.primaryLinkUrl,
         businessName: company.name,
       }),
       googlePlacesApiKey !== null && company.googlePlaceId
-        ? fetchBusinessPhotos({
+        ? fetchGoogleListing({
             apiKey: googlePlacesApiKey,
             googlePlaceId: company.googlePlaceId,
           })
-        : [],
+        : { photos: [], reviews: [] },
     ]);
 
     console.log(
@@ -57,7 +57,7 @@ const handler = async (input: unknown) => {
         (brandKit === null
           ? 'current website unreadable'
           : `logo ${brandKit.logo === null ? 'missing' : 'found'}, ${brandKit.photos.length} website photos, colours ${brandKit.colors.join(' ') || 'none'}`) +
-        `, ${googlePhotos.length} Google photos`,
+        `, ${googleListing.photos.length} Google photos, ${googleListing.reviews.length} Google reviews`,
     );
 
     const html = await generatePitchSiteHtml({
@@ -65,7 +65,7 @@ const handler = async (input: unknown) => {
       model,
       company,
       brandKit,
-      googlePhotos,
+      googleListing,
     });
 
     await savePitchSiteHtml(company.id, html);
