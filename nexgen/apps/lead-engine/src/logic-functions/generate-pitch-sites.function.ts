@@ -15,7 +15,7 @@ const handler = async (input: unknown) => {
     return { success: false, queued: 0, message: 'No companies selected.' };
   }
 
-  await queuePitchSites(companyIds);
+  await queuePitchSites(companyIds, { rebuild: true });
 
   return { success: true, queued: companyIds.length };
 };

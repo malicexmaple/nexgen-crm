@@ -3,7 +3,7 @@ import { isNonEmptyString } from 'src/logic-functions/utils/guards';
 
 const FETCH_TIMEOUT_MS = 15_000;
 const MAX_HTML_BYTES = 5_000_000;
-const USER_AGENT =
+export const USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
 
 export const normalizeWebsiteUrl = (

@@ -12,6 +12,8 @@ import {
   getOptionalSetting,
   getRequiredSetting,
 } from 'src/logic-functions/utils/settings';
+import { fetchBrandKit } from 'src/pitch-site/fetch-brand-kit';
+import { fetchBusinessPhotos } from 'src/pitch-site/fetch-business-photos';
 import { generatePitchSiteHtml } from 'src/pitch-site/generate-pitch-site-html';
 import {
   buildPitchSiteUrl,
@@ -28,6 +30,7 @@ const handler = async (input: unknown) => {
   );
   const model =
     getOptionalSetting(SETTING_NAMES.pitchSiteModel) ?? DEFAULT_PITCH_SITE_MODEL;
+  const googlePlacesApiKey = getOptionalSetting(SETTING_NAMES.googlePlacesApiKey);
   const client = new CoreApiClient({ runAs: 'application' });
   const companies = await readLeadCompanies({
     client,
@@ -36,7 +39,34 @@ const handler = async (input: unknown) => {
   const built: string[] = [];
 
   for (const company of companies) {
-    const html = await generatePitchSiteHtml({ apiKey, model, company });
+    const [brandKit, googlePhotos] = await Promise.all([
+      fetchBrandKit({
+        websiteUrl: company.domainName?.primaryLinkUrl,
+        businessName: company.name,
+      }),
+      googlePlacesApiKey !== null && company.googlePlaceId
+        ? fetchBusinessPhotos({
+            apiKey: googlePlacesApiKey,
+            googlePlaceId: company.googlePlaceId,
+          })
+        : [],
+    ]);
+
+    console.log(
+      `Building pitch site for ${company.name ?? company.id}: ` +
+        (brandKit === null
+          ? 'current website unreadable'
+          : `logo ${brandKit.logo === null ? 'missing' : 'found'}, ${brandKit.photos.length} website photos, colours ${brandKit.colors.join(' ') || 'none'}`) +
+        `, ${googlePhotos.length} Google photos`,
+    );
+
+    const html = await generatePitchSiteHtml({
+      apiKey,
+      model,
+      company,
+      brandKit,
+      googlePhotos,
+    });
 
     await savePitchSiteHtml(company.id, html);
     await updateCompany({

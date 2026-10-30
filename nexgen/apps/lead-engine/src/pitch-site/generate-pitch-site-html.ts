@@ -2,10 +2,15 @@ import Anthropic from '@anthropic-ai/sdk';
 
 import { type LeadCompany } from 'src/logic-functions/utils/company-records';
 import {
-  buildPitchSitePrompt,
+  buildPitchSiteContent,
   PITCH_SITE_SYSTEM_PROMPT,
 } from 'src/pitch-site/build-pitch-site-prompt';
-import { sanitizePitchSiteHtml } from 'src/pitch-site/sanitize-pitch-site-html';
+import { type BrandKit } from 'src/pitch-site/fetch-brand-kit';
+import { type BusinessPhoto } from 'src/pitch-site/fetch-business-photos';
+import {
+  addPitchSiteSafetyTags,
+  sanitizePitchSiteHtml,
+} from 'src/pitch-site/sanitize-pitch-site-html';
 
 // Models that accept server-side refusal fallbacks in the "default" form.
 const FALLBACK_CAPABLE_MODELS = new Set([
@@ -26,20 +31,27 @@ export const generatePitchSiteHtml = async ({
   apiKey,
   model,
   company,
+  brandKit,
+  googlePhotos,
 }: {
   apiKey: string;
   model: string;
   company: LeadCompany;
+  brandKit: BrandKit | null;
+  googlePhotos: BusinessPhoto[];
 }): Promise<string> => {
   const client = new Anthropic({ apiKey });
   const supportsFallback = FALLBACK_CAPABLE_MODELS.has(model);
 
+  // High effort: the page is the sales pitch, so design quality is worth the extra thinking.
   const stream = client.beta.messages.stream({
     model,
-    max_tokens: 32000,
-    output_config: { effort: 'medium' },
+    max_tokens: 48000,
+    output_config: { effort: 'high' },
     system: PITCH_SITE_SYSTEM_PROMPT,
-    messages: [{ role: 'user', content: buildPitchSitePrompt(company) }],
+    messages: [
+      { role: 'user', content: buildPitchSiteContent(company, { brandKit, googlePhotos }) },
+    ],
     ...(supportsFallback
       ? { betas: ['server-side-fallback-2026-07-01'], fallbacks: 'default' }
       : {}),
@@ -67,5 +79,5 @@ export const generatePitchSiteHtml = async ({
     throw new PitchSiteGenerationError('Claude returned an incomplete HTML document.');
   }
 
-  return html;
+  return addPitchSiteSafetyTags(html);
 };

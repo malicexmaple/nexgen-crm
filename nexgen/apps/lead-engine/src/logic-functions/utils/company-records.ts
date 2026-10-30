@@ -6,8 +6,13 @@ export type LeadCompany = {
   id: string;
   name: string | null;
   domainName: { primaryLinkUrl: string | null } | null;
-  address: { addressCity: string | null; addressState: string | null } | null;
+  address: {
+    addressCity: string | null;
+    addressState: string | null;
+    addressCountry: string | null;
+  } | null;
   phone: { primaryPhoneNumber: string | null; primaryPhoneCallingCode: string | null } | null;
+  googlePlaceId: string | null;
   googleCategory: string | null;
   googleRating: number | null;
   googleReviewCount: number | null;
@@ -40,8 +45,9 @@ export const readLeadCompanies = async ({
           id: true,
           name: true,
           domainName: { primaryLinkUrl: true },
-          address: { addressCity: true, addressState: true },
+          address: { addressCity: true, addressState: true, addressCountry: true },
           phone: { primaryPhoneNumber: true, primaryPhoneCallingCode: true },
+          googlePlaceId: true,
           googleCategory: true,
           googleRating: true,
           googleReviewCount: true,
