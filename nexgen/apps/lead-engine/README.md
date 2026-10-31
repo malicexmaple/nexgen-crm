@@ -6,7 +6,9 @@ A Twenty app that turns Google Maps into a cold-call list:
 2. **Score the website (1-10)** – runs automatically on every new Company: HTTPS, mobile-friendliness, copyright year, speed, page weight, title/description, outdated tech, click-to-call/contact form. No website = 1.
 3. **Size and price** – size tier from Google review count, build complexity from the business type and the current site (online store, booking), and a quote = base price × size multiplier (`src/constants/pricing.ts`).
 4. **Pitch site** – for websites scoring at or below the threshold (default 4), Claude designs a one-page concept site. It is served at an unlisted link `<CRM URL>/s/nexgen/pitch/<company id>` and saved in the Company's *Pitch site* field.
-5. **Views** – *Call queue* (sorted by lead priority) and *Lead pipeline* (kanban by lead status, summing estimated price).
+5. **Call opener** – alongside each pitch site, Claude Sonnet writes two or three lines to open the call with, from the rating, reviews and website problems.
+6. **Site opens** – each time the business opens its pitch site, *Site opens* goes up and *Site last opened* is set. Opens from inside the CRM, link previews, bots and reloads within 30 minutes are not counted.
+7. **Views** – *Call queue* (sorted by lead priority) and *Lead pipeline* (kanban by lead status, summing estimated price).
 
 ## Settings (Settings → Apps → NEXGEN Lead Engine → Variables)
 

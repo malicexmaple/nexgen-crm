@@ -19,6 +19,7 @@ const CARD_FIELDS: [keyof typeof VIEW_FIELD_IDS, string][] = [
   ['websiteScore', FIELD_IDS.websiteScore],
   ['phone', FIELD_IDS.phone],
   ['pitchSiteUrl', FIELD_IDS.pitchSiteUrl],
+  ['pitchSiteOpens', FIELD_IDS.pitchSiteOpens],
   ['leadStatus', FIELD_IDS.leadStatus],
 ];
 

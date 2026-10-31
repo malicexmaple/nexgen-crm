@@ -19,6 +19,7 @@ import {
   buildPitchSiteUrl,
   savePitchSiteHtml,
 } from 'src/pitch-site/pitch-site-storage';
+import { writeCallOpener } from 'src/pitch-site/write-call-opener';
 
 const STATUSES_TO_ADVANCE = new Set([null, 'NEW', 'AUDITED']);
 
@@ -60,13 +61,23 @@ const handler = async (input: unknown) => {
         `, ${googleListing.photos.length} Google photos, ${googleListing.reviews.length} Google reviews`,
     );
 
-    const html = await generatePitchSiteHtml({
-      apiKey,
-      model,
-      company,
-      brandKit,
-      googleListing,
-    });
+    const [html, callOpener] = await Promise.all([
+      generatePitchSiteHtml({
+        apiKey,
+        model,
+        company,
+        brandKit,
+        googleListing,
+      }),
+      writeCallOpener({ apiKey, company, reviews: googleListing.reviews }).catch((error) => {
+        console.warn(
+          'Could not write the call opener:',
+          error instanceof Error ? error.message : error,
+        );
+
+        return null;
+      }),
+    ]);
 
     await savePitchSiteHtml(company.id, html);
     await updateCompany({
@@ -78,6 +89,7 @@ const handler = async (input: unknown) => {
           primaryLinkLabel: 'Pitch site',
           secondaryLinks: null,
         },
+        ...(callOpener !== null ? { callOpener } : {}),
         ...(STATUSES_TO_ADVANCE.has(company.leadStatus)
           ? { leadStatus: 'PITCH_READY' }
           : {}),

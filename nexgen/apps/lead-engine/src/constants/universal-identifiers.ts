@@ -32,6 +32,9 @@ export const COMPANY_FIELD_UNIVERSAL_IDENTIFIERS = {
   leadPriority: '32aeaf55-1860-4da7-be0d-fa98f903807d',
   leadStatus: '500ab9b2-57c1-4433-8bf4-65a5c8bb12f3',
   pitchSiteUrl: 'a1f16777-fae5-46f7-86ea-32351553de62',
+  pitchSiteOpens: 'd67a7191-6fb9-4dd4-8897-551e5bb386bd',
+  pitchSiteLastOpenedAt: 'cd2992af-3392-4a04-a659-e0554134fe26',
+  callOpener: '5f161e73-a53f-4454-89fd-aac16fc01698',
 } as const;
 
 export const SELECT_OPTION_UNIVERSAL_IDENTIFIERS = {
@@ -102,6 +105,9 @@ export const CALL_QUEUE_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
   websiteIssues: 'cfd9e7dc-6a37-4a6f-81bc-35b2394aa52d',
   domainName: '13bc72e0-7085-4402-9af1-32b5ecbb9ef9',
   googleCategory: '6d844aa2-8615-40e8-b0ce-91566d60b47d',
+  pitchSiteOpens: 'b5049275-0bb8-4585-a6ef-202945530408',
+  pitchSiteLastOpenedAt: '3b97f539-9470-4330-b946-98d499fd46c9',
+  callOpener: '1873058d-19dc-4d3c-bec9-fbaed0032162',
 } as const;
 
 export const LEAD_PIPELINE_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
@@ -111,6 +117,7 @@ export const LEAD_PIPELINE_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
   phone: '8e23dd74-33c5-4328-9405-c261d644b794',
   pitchSiteUrl: 'e7a664b0-e138-43f5-94a2-ed74954a29e8',
   leadStatus: 'be3c92f0-f6fe-42b0-a3b3-30fdde67b6c0',
+  pitchSiteOpens: '7f436aef-b304-47a5-adba-b96e5d7be8e5',
 } as const;
 
 export const LEAD_PIPELINE_VIEW_GROUP_UNIVERSAL_IDENTIFIERS = {
