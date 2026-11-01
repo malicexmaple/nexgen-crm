@@ -1,6 +1,7 @@
 import { defineApplication, FieldType } from 'twenty-sdk/define';
 
 import {
+  DEFAULT_CALLING_TIME_ZONE,
   DEFAULT_CURRENCY_CODE,
   DEFAULT_PITCH_SITE_MAX_SCORE,
   DEFAULT_PITCH_SITE_MODEL,
@@ -70,6 +71,23 @@ export default defineApplication({
         'Claude model that writes pitch sites. claude-sonnet-5-5 is cheaper; claude-opus-5-5 is the most polished.',
       isSecret: false,
       value: DEFAULT_PITCH_SITE_MODEL,
+    },
+    [SETTING_NAMES.callingTimeZone]: {
+      universalIdentifier: APPLICATION_VARIABLE_UNIVERSAL_IDENTIFIERS.callingTimeZone,
+      label: 'Calling time zone',
+      description:
+        'Time zone used to work out the six calendar months of Nurture, e.g. Australia/Sydney.',
+      isSecret: false,
+      value: DEFAULT_CALLING_TIME_ZONE,
+    },
+    [SETTING_NAMES.callingAdminEmails]: {
+      universalIdentifier:
+        APPLICATION_VARIABLE_UNIVERSAL_IDENTIFIERS.callingAdminEmails,
+      label: 'Calling admins',
+      description:
+        'Emails of the people who can undo any call, reverse a DNQ and move Spoken to leads back to Ready to call. Separate with commas.',
+      isSecret: false,
+      value: '',
     },
   },
 });

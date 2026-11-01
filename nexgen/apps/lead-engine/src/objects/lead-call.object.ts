@@ -1,0 +1,120 @@
+import { defineObject, FieldType, MetadataWritability } from 'twenty-sdk/define';
+
+import {
+  LEAD_CALL_NEW_STATUS_OPTIONS,
+  LEAD_CALL_OUTCOME_OPTIONS,
+  LEAD_CALL_PREVIOUS_STATUS_OPTIONS,
+} from 'src/constants/select-options';
+import {
+  LEAD_CALL_FIELD_UNIVERSAL_IDENTIFIERS as FIELD_IDS,
+  LEAD_CALL_OBJECT_UNIVERSAL_IDENTIFIER,
+} from 'src/constants/universal-identifiers';
+
+// Written only by the calling functions, so the history cannot be edited or faked from the UI.
+export default defineObject({
+  universalIdentifier: LEAD_CALL_OBJECT_UNIVERSAL_IDENTIFIER,
+  nameSingular: 'leadCall',
+  namePlural: 'leadCalls',
+  labelSingular: 'Call',
+  labelPlural: 'Calls',
+  description: 'One recorded call outcome on a lead. Undone calls stay, marked as undone.',
+  icon: 'IconPhoneCall',
+  writability: MetadataWritability.APPLICATION,
+  isUICreatable: false,
+  isUIEditable: false,
+  fields: [
+    {
+      universalIdentifier: FIELD_IDS.callAttempt,
+      name: 'callAttempt',
+      type: FieldType.NUMBER,
+      label: 'Call attempt',
+      icon: 'IconPhone',
+      universalSettings: { decimals: 0 },
+    },
+    {
+      universalIdentifier: FIELD_IDS.callingCycle,
+      name: 'callingCycle',
+      type: FieldType.NUMBER,
+      label: 'Calling cycle',
+      icon: 'IconRepeat',
+      universalSettings: { decimals: 0 },
+    },
+    {
+      universalIdentifier: FIELD_IDS.outcome,
+      name: 'outcome',
+      type: FieldType.SELECT,
+      label: 'Outcome',
+      icon: 'IconPhoneCheck',
+      options: LEAD_CALL_OUTCOME_OPTIONS,
+    },
+    {
+      universalIdentifier: FIELD_IDS.calledAt,
+      name: 'calledAt',
+      type: FieldType.DATE_TIME,
+      label: 'Called at',
+      icon: 'IconCalendarEvent',
+    },
+    {
+      universalIdentifier: FIELD_IDS.previousStatus,
+      name: 'previousStatus',
+      type: FieldType.SELECT,
+      label: 'Status before',
+      icon: 'IconArrowLeft',
+      options: LEAD_CALL_PREVIOUS_STATUS_OPTIONS,
+    },
+    {
+      universalIdentifier: FIELD_IDS.newStatus,
+      name: 'newStatus',
+      type: FieldType.SELECT,
+      label: 'Status after',
+      icon: 'IconArrowRight',
+      options: LEAD_CALL_NEW_STATUS_OPTIONS,
+    },
+    {
+      universalIdentifier: FIELD_IDS.nextCallAt,
+      name: 'nextCallAt',
+      type: FieldType.DATE_TIME,
+      label: 'Next call date',
+      icon: 'IconCalendarTime',
+    },
+    {
+      universalIdentifier: FIELD_IDS.note,
+      name: 'note',
+      type: FieldType.TEXT,
+      label: 'Note',
+      icon: 'IconNotes',
+    },
+    {
+      universalIdentifier: FIELD_IDS.requestId,
+      name: 'requestId',
+      type: FieldType.TEXT,
+      label: 'Request',
+      description: 'One per button click, so a repeated click can never record a second call.',
+      icon: 'IconFingerprint',
+      isUnique: true,
+    },
+    {
+      universalIdentifier: FIELD_IDS.previousState,
+      name: 'previousState',
+      type: FieldType.RAW_JSON,
+      label: 'Lead before',
+      description: 'The calling fields before this call, restored if the call is undone.',
+      icon: 'IconHistory',
+    },
+    {
+      universalIdentifier: FIELD_IDS.undoneAt,
+      name: 'undoneAt',
+      type: FieldType.DATE_TIME,
+      label: 'Undone at',
+      icon: 'IconArrowBackUp',
+    },
+    {
+      universalIdentifier: FIELD_IDS.undoneBy,
+      name: 'undoneBy',
+      type: FieldType.TEXT,
+      label: 'Undone by',
+      description: 'Who undid the call.',
+      icon: 'IconUsers',
+    },
+  ],
+});

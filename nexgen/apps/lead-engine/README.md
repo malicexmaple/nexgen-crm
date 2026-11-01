@@ -9,6 +9,13 @@ A Twenty app that turns Google Maps into a cold-call list:
 5. **Call opener** – alongside each pitch site, Claude Sonnet writes two or three lines to open the call with, from the rating, reviews and website problems.
 6. **Site opens** – each time the business opens its pitch site, *Site opens* goes up and *Site last opened* is set. Opens from inside the CRM, link previews, bots and reloads within 30 minutes are not counted.
 7. **Views** – *Call queue* (sorted by lead priority) and *Lead pipeline* (kanban by lead status, summing estimated price).
+8. **Calling pipeline** – every lead starts READY on CALL 1. Four buttons record each call:
+   - **ANSWERED** moves the lead to *Spoken to*, keeping its call number.
+   - **NO ANSWER** snoozes calls 1-4 for 3 hours and brings the lead back on the next call. On call 5 it goes to *Nurture*.
+   - **NURTURE** parks the lead for 6 calendar months, then brings it back on CALL 1.
+   - **DNQ** removes the lead for good and keeps its history.
+
+   A scheduled job runs every minute and returns leads whose time is up. Every click is saved as a *Call* record.
 
 ## Settings (Settings → Apps → NEXGEN Lead Engine → Variables)
 
@@ -20,12 +27,19 @@ A Twenty app that turns Google Maps into a cold-call list:
 | Auto-build pitch sites | On by default; each site is one Claude API call. |
 | Pitch site score threshold | 4 by default. |
 | Pitch site Claude model | `claude-opus-5-5` by default; `claude-sonnet-5-5` is cheaper. |
+| Calling time zone | `Australia/Sydney` by default. Sets the time zone for the six calendar months of Nurture. |
+| Calling admins | Emails, comma separated. These people can undo any call, reverse a DNQ and move Spoken to leads back. |
 
 ## Using it
 
 - **Find leads:** Workflows → new workflow → Manual trigger → action **Find leads on Google Maps** → enter a search. Or `POST <CRM URL>/s/nexgen/scan-area` with `{"query": "dentists in Austin, TX", "maxResults": 20}` and an API key as Bearer token.
 - **Re-score existing companies:** workflow action **Audit websites**, or `POST /s/nexgen/audit-companies` with `{"companyIds": [...]}`.
 - **Build pitch sites on demand:** workflow action **Build pitch sites**, or `POST /s/nexgen/generate-pitch-sites` with `{"companyIds": [...]}`.
+- **Call leads:**
+  - **Calling → Start calling** shows one lead at a time and holds it for you for 10 minutes. Each button loads the next lead.
+  - Every lead page also opens on a **Call** tab with the same buttons.
+  - The lists are *READY TO CALL*, *SPOKEN TO*, *NURTURE* and *DISQUALIFIED*; reports are on the Start calling page's **Reports** tab.
+  - A salesperson can undo their own call for 10 minutes. Calling admins can undo any call at any time.
 
 ## Installing on the live CRM
 
@@ -51,3 +65,5 @@ twenty app apply --create   # first install; afterwards just `twenty app apply`
 ```
 
 The server must run logic functions: set `LOGIC_FUNCTION_TYPE=LOCAL` on both the server and the worker.
+
+When an apply adds a new object, the server may generate the functions' API client before the object is visible. Calls then fail with "type `Query` does not have a field". The server only rebuilds the client when the schema changes, so apply again with any field or description change.

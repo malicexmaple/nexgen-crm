@@ -41,7 +41,16 @@ export type LeadStatus =
   | 'WON'
   | 'LOST';
 
-export const SIZE_TIER_OPTIONS = toFieldOptions<SizeTier>(
+export type CallingStatus =
+  | 'READY'
+  | 'SNOOZED'
+  | 'NURTURE'
+  | 'SPOKEN_TO'
+  | 'DISQUALIFIED';
+export type CallOutcome = 'ANSWERED' | 'NO_ANSWER' | 'NURTURE' | 'DNQ';
+export type CallHistoryOutcome = CallOutcome | 'REACTIVATED';
+
+export const SIZE_TIER_OPTIONS =toFieldOptions<SizeTier>(
   [
     { value: 'SMALL', label: 'Small', color: 'sky' },
     { value: 'MEDIUM', label: 'Medium', color: 'blue' },
@@ -70,4 +79,47 @@ export const LEAD_STATUS_OPTIONS = toFieldOptions<LeadStatus>(
     { value: 'LOST', label: 'Lost', color: 'red' },
   ],
   SELECT_OPTION_UNIVERSAL_IDENTIFIERS.leadStatus,
+);
+
+const CALLING_STATUS_DEFINITIONS: SelectOptionDefinition<CallingStatus>[] = [
+  { value: 'READY', label: 'Ready to call', color: 'green' },
+  { value: 'SNOOZED', label: 'Snoozed', color: 'yellow' },
+  { value: 'NURTURE', label: 'Nurture', color: 'orange' },
+  { value: 'SPOKEN_TO', label: 'Spoken to', color: 'blue' },
+  { value: 'DISQUALIFIED', label: 'DNQ', color: 'red' },
+];
+
+const CALL_OUTCOME_DEFINITIONS: SelectOptionDefinition<CallOutcome>[] = [
+  { value: 'ANSWERED', label: 'Answered', color: 'green' },
+  { value: 'NO_ANSWER', label: 'No answer', color: 'gray' },
+  { value: 'NURTURE', label: 'Nurture', color: 'orange' },
+  { value: 'DNQ', label: 'DNQ', color: 'red' },
+];
+
+export const CALLING_STATUS_OPTIONS = toFieldOptions<CallingStatus>(
+  CALLING_STATUS_DEFINITIONS,
+  SELECT_OPTION_UNIVERSAL_IDENTIFIERS.callingStatus,
+);
+
+export const LAST_CALL_OUTCOME_OPTIONS = toFieldOptions<CallOutcome>(
+  CALL_OUTCOME_DEFINITIONS,
+  SELECT_OPTION_UNIVERSAL_IDENTIFIERS.lastCallOutcome,
+);
+
+export const LEAD_CALL_OUTCOME_OPTIONS = toFieldOptions<CallHistoryOutcome>(
+  [
+    ...CALL_OUTCOME_DEFINITIONS,
+    { value: 'REACTIVATED', label: 'Moved back to Ready', color: 'sky' },
+  ],
+  SELECT_OPTION_UNIVERSAL_IDENTIFIERS.leadCallOutcome,
+);
+
+export const LEAD_CALL_PREVIOUS_STATUS_OPTIONS = toFieldOptions<CallingStatus>(
+  CALLING_STATUS_DEFINITIONS,
+  SELECT_OPTION_UNIVERSAL_IDENTIFIERS.leadCallPreviousStatus,
+);
+
+export const LEAD_CALL_NEW_STATUS_OPTIONS = toFieldOptions<CallingStatus>(
+  CALLING_STATUS_DEFINITIONS,
+  SELECT_OPTION_UNIVERSAL_IDENTIFIERS.leadCallNewStatus,
 );
