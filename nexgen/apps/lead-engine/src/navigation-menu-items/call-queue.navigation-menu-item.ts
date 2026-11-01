@@ -12,7 +12,7 @@ export default defineNavigationMenuItem({
   universalIdentifier: NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS.callQueue,
   name: 'Call queue',
   icon: 'IconPhoneCall',
-  position: 0,
+  position: 1,
   type: NavigationMenuItemType.VIEW,
   viewUniversalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.callQueue,
 });

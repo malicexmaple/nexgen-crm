@@ -10,10 +10,9 @@ import {
 
 export default defineNavigationMenuItem({
   universalIdentifier: NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS.leadPool,
-  name: 'Start calling',
-  icon: 'IconPhoneCall',
+  name: 'Working Lead Pool',
+  icon: 'IconList',
   position: 0,
   type: NavigationMenuItemType.VIEW,
   viewUniversalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.leadPool,
-  folderUniversalIdentifier: NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS.callingFolder,
 });

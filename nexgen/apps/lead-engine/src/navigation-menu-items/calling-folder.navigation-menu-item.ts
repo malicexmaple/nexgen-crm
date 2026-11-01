@@ -9,6 +9,6 @@ export default defineNavigationMenuItem({
   universalIdentifier: NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS.callingFolder,
   name: 'Calling',
   icon: 'IconPhoneCall',
-  position: 2,
+  position: 3,
   type: NavigationMenuItemType.FOLDER,
 });

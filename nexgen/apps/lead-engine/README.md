@@ -36,9 +36,9 @@ A Twenty app that turns Google Maps into a cold-call list:
 - **Re-score existing companies:** workflow action **Audit websites**, or `POST /s/nexgen/audit-companies` with `{"companyIds": [...]}`.
 - **Build pitch sites on demand:** workflow action **Build pitch sites**, or `POST /s/nexgen/generate-pitch-sites` with `{"companyIds": [...]}`.
 - **Call leads:**
-  - **Calling → Start calling** is the lead pool: a board with a column per calling status, highest Lead priority first. Snoozed and Nurture cards count down to their next call.
-  - Click a lead to open its page on the **Call** tab: the four buttons, the call opener, contacts with phones and emails, address, Google details and website problems. Opening a Ready lead holds it for you for 10 minutes. **Next lead →** opens the top Ready lead.
-  - Cards can't be dragged between columns; leads only move through the buttons.
+  - **Working Lead Pool** (top of the sidebar) is where every new lead lands: a list of all leads with their calling status, highest Lead priority first.
+  - Click a lead to open its page on the **Call** tab: the four buttons side by side across the top, then the call opener, contacts with phones and emails, address, Google details and website problems. Opening a Ready lead holds it for you for 10 minutes. **Next lead →** opens the top Ready lead.
+  - Leads only move between calling statuses through the buttons.
   - The lists are *READY TO CALL*, *SPOKEN TO*, *NURTURE* and *DISQUALIFIED*; numbers are on **Calling reports**.
   - A salesperson can undo their own call for 10 minutes. Calling admins can undo any call at any time.
 

@@ -280,7 +280,7 @@ export const CALLING_VIEW_FILTER_UNIVERSAL_IDENTIFIERS = {
   spokenToStatus: '07cd6f6a-00a9-42e1-a053-743208d1e8a0',
   nurtureStatus: '5043aad9-3094-43b0-b77c-f9319fb934f3',
   disqualifiedStatus: 'fad4d4f3-0bf8-4f5b-befa-b9053dc280c9',
-  leadPoolPhone: 'befce74d-6094-4db6-aeea-81fdb4968cc2',
+  leadPoolStatus: 'cdff7f6d-1d8d-45ad-8ec2-36f117b4ffc9',
 } as const;
 
 export const CALLING_VIEW_SORT_UNIVERSAL_IDENTIFIERS = {
@@ -339,14 +339,9 @@ export const LEAD_POOL_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
   lastCallOutcome: '1b5b0e9e-bb6e-45ed-9b0c-0ab7555d6dd8',
   lastCalledBy: '3d1e885a-aae0-4c7a-8b38-d313d0209658',
   leadPriority: '49c18333-682b-461d-b253-16754abf8760',
-} as const;
-
-export const LEAD_POOL_VIEW_GROUP_UNIVERSAL_IDENTIFIERS = {
-  READY: 'a5e4cd95-ef5b-44fc-b3fd-956a77ac4dcd',
-  SNOOZED: 'f459bc31-f292-43a0-8ab3-1d3ee9ea7279',
-  NURTURE: '89a7cf11-2a13-4148-b8c2-72c9c38ec4a4',
-  SPOKEN_TO: '665794fc-9c5f-4867-a116-79ff9fb51bea',
-  DISQUALIFIED: 'b8aebee9-54ca-4172-85b1-7cbb00b426ea',
+  websiteScore: '306ce556-720f-4f57-a840-59a806490b9a',
+  googleCategory: 'a61f29b1-76e1-4da0-b382-cef3458be321',
+  domainName: '5c61fff4-7227-43e6-8442-1636f9b9f831',
 } as const;
 
 export const CALL_QUEUE_SORT_UNIVERSAL_IDENTIFIER =

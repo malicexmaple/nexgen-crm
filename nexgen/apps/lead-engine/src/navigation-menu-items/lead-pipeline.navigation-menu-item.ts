@@ -12,7 +12,7 @@ export default defineNavigationMenuItem({
   universalIdentifier: NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS.leadPipeline,
   name: 'Lead pipeline',
   icon: 'IconLayoutKanban',
-  position: 1,
+  position: 2,
   type: NavigationMenuItemType.VIEW,
   viewUniversalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.leadPipeline,
 });
