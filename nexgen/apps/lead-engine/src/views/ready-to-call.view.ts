@@ -36,6 +36,7 @@ export default defineView({
   universalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.readyToCall,
   name: 'READY TO CALL',
   icon: 'IconPhoneCall',
+  position: 3,
   objectUniversalIdentifier:
     STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier,
   type: ViewType.TABLE,

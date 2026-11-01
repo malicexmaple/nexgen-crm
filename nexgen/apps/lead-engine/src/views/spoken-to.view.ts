@@ -32,6 +32,7 @@ export default defineView({
   universalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.spokenTo,
   name: 'SPOKEN TO',
   icon: 'IconPhoneIncoming',
+  position: 4,
   objectUniversalIdentifier:
     STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier,
   type: ViewType.TABLE,

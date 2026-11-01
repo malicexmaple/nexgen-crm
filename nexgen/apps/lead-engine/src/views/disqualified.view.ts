@@ -30,6 +30,7 @@ export default defineView({
   universalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.disqualified,
   name: 'DISQUALIFIED',
   icon: 'IconBan',
+  position: 6,
   objectUniversalIdentifier:
     STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier,
   type: ViewType.TABLE,

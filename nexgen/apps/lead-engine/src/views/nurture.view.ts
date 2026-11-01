@@ -32,6 +32,7 @@ export default defineView({
   universalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.nurture,
   name: 'NURTURE',
   icon: 'IconHourglass',
+  position: 5,
   objectUniversalIdentifier:
     STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier,
   type: ViewType.TABLE,

@@ -27,6 +27,7 @@ export default defineView({
   universalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.leadPipeline,
   name: 'Lead pipeline',
   icon: 'IconLayoutKanban',
+  position: 2,
   objectUniversalIdentifier:
     STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier,
   type: ViewType.KANBAN,
