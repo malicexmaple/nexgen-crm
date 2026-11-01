@@ -218,7 +218,7 @@ export const CALLING_REPORT_WIDGET_UNIVERSAL_IDENTIFIERS = {
 } as const;
 
 export const VIEW_UNIVERSAL_IDENTIFIERS = {
-  callQueue: 'c4597e66-c0b2-4fc9-ad74-fd18f423d128',
+  callQueue: '750a2cae-6eec-4d38-8d95-28e41ef5303c',
   leadPipeline: '473e29d1-8914-4a56-ad24-23f09a165f3c',
   readyToCall: 'da9d13b8-90f5-436f-adb4-3a718cd8cd1d',
   spokenTo: 'a989ed04-3b7e-437f-a5fb-e21d512e0cf0',
@@ -292,21 +292,21 @@ export const CALLING_VIEW_SORT_UNIVERSAL_IDENTIFIERS = {
 } as const;
 
 export const CALL_QUEUE_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
-  name: '12628b34-5bc4-4812-bb8f-517424512897',
-  phone: '83fc2bbf-06de-457f-ba08-4819c4f12186',
-  leadPriority: '0b713300-3ab0-4f1b-b319-2b84cb45839d',
-  websiteScore: '4c713b93-f817-47dc-a8cc-0023cc64d285',
-  estimatedPrice: 'a6c004c0-f268-4e4b-b0e7-ea4d0a67e22f',
-  sizeTier: '7dfd3a2c-bf4d-4a6a-9a24-ec4de04e5b34',
-  complexityTier: '756ed9e6-572c-4450-968a-9531e8514439',
-  leadStatus: '4c31fc28-0813-457c-bcc1-d726e0020817',
-  pitchSiteUrl: '370a30e4-6e6a-492b-af48-1acea929886d',
-  websiteIssues: 'cfd9e7dc-6a37-4a6f-81bc-35b2394aa52d',
-  domainName: '13bc72e0-7085-4402-9af1-32b5ecbb9ef9',
-  googleCategory: '6d844aa2-8615-40e8-b0ce-91566d60b47d',
-  pitchSiteOpens: 'b5049275-0bb8-4585-a6ef-202945530408',
-  pitchSiteLastOpenedAt: '3b97f539-9470-4330-b946-98d499fd46c9',
-  callOpener: '1873058d-19dc-4d3c-bec9-fbaed0032162',
+  name: '55e390ad-b4b1-4b3f-b30f-fcb8799ed70b',
+  phone: '099e9d30-3eb3-4bfd-a345-bb0680256780',
+  leadPriority: '5e41c81a-b09a-49de-8f2a-57faa7c9b2ff',
+  websiteScore: 'fdc90e0a-6384-4728-80fc-b1556845b83c',
+  estimatedPrice: 'ab616db2-97c1-46fb-b713-37039da56eb2',
+  sizeTier: '8a0db23f-815b-447f-aedf-5f9138cd3b80',
+  complexityTier: '3283d396-af48-4301-acf2-2f271baed2f0',
+  leadStatus: '5072b44d-0581-40f5-aa69-94a31c73ee02',
+  pitchSiteUrl: '2d33cc50-34c6-4d81-a3bf-c2a0bd8466a7',
+  websiteIssues: 'fd2982fc-57f7-46fb-885c-f473dc92488f',
+  domainName: '3f18c399-367e-4327-aad9-cfc8a5075053',
+  googleCategory: '6dcd279c-96ce-4045-bb68-7c95476bc06a',
+  pitchSiteOpens: 'b471d67b-4294-401a-9420-246c6a690549',
+  pitchSiteLastOpenedAt: 'eec29c88-3517-45c5-9ee0-905b0fb2e050',
+  callOpener: 'bc953645-9a1a-43cc-818a-c49a35f06de0',
 } as const;
 
 export const LEAD_PIPELINE_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
@@ -330,10 +330,10 @@ export const LEAD_PIPELINE_VIEW_GROUP_UNIVERSAL_IDENTIFIERS = {
 } as const;
 
 export const CALL_QUEUE_SORT_UNIVERSAL_IDENTIFIER =
-  'ac090f88-9156-487b-a5de-5c1bff5c84da';
+  'ebed4e35-0501-41e0-8372-12ae215ca93a';
 
 export const NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS = {
-  callQueue: '88196f10-82e6-431f-8116-d45fbaee7af0',
+  callQueue: '9a641f08-5cef-4ea4-8ee5-631b527c0ca2',
   leadPipeline: 'ab9dda52-df8b-4ead-98a3-996131f3e41d',
   callingFolder: '82ecfce1-e864-4d13-8349-ef9015ee4f5c',
   callingPage: 'a312f6d8-425b-4393-bf1e-248ca4e61b3f',
