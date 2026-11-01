@@ -10,9 +10,9 @@ import {
 
 export default defineNavigationMenuItem({
   universalIdentifier: NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS.callingPage,
-  name: 'Start calling',
-  icon: 'IconPhoneCall',
-  position: 0,
+  name: 'Calling reports',
+  icon: 'IconChartBar',
+  position: 6,
   type: NavigationMenuItemType.PAGE_LAYOUT,
   pageLayoutUniversalIdentifier: CALLING_PAGE_LAYOUT_UNIVERSAL_IDENTIFIERS.pageLayout,
   folderUniversalIdentifier: NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS.callingFolder,

@@ -2,7 +2,33 @@ import {
   type CallHistoryOutcome,
   type CallingStatus,
   type CallOutcome,
+  type LeadStatus,
 } from 'src/constants/select-options';
+
+export type LeadContact = {
+  name: string | null;
+  jobTitle: string | null;
+  email: string | null;
+  phoneNumber: string | null;
+  phoneHref: string | null;
+};
+
+export type LeadProfile = {
+  address: string | null;
+  websiteUrl: string | null;
+  googleMapsUrl: string | null;
+  googleRating: number | null;
+  googleReviewCount: number | null;
+  businessType: string | null;
+  websiteScore: number | null;
+  websiteIssues: string[];
+  estimatedPrice: { amount: number; currencyCode: string } | null;
+  leadStatus: LeadStatus | null;
+  leadPriority: number | null;
+  pitchSiteOpens: number;
+  pitchSiteLastOpenedAt: string | null;
+  contacts: LeadContact[];
+};
 
 export type LeadCardCall = {
   id: string;
@@ -37,6 +63,7 @@ export type LeadCard = {
   undoableCallId: string | null;
   canReactivate: boolean;
   recentCalls: LeadCardCall[];
+  profile: LeadProfile;
 };
 
 export type SavedCall = {

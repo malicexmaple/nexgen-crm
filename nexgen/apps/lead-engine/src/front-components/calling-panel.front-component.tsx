@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RestApiClient } from 'twenty-client-sdk/rest';
 import {
   defineFrontComponent,
@@ -33,8 +33,6 @@ import { getCallingPalette } from 'src/front-components/calling-panel/calling-pa
 import { createRequestId } from 'src/front-components/calling-panel/create-request-id';
 import { LeadCardView } from 'src/front-components/calling-panel/lead-card-view';
 
-const EMPTY_POOL_REFRESH_MS = 60 * 1000;
-
 const postCallingRoute = (path: string, body: Record<string, unknown>) =>
   new RestApiClient().post<CallingResponse>(`/s${path}`, body);
 
@@ -48,46 +46,59 @@ const postCallingRouteWithRetry = async (path: string, body: Record<string, unkn
   }
 };
 
+const releaseLead = (companyId: string) =>
+  postCallingRoute(LOGIC_FUNCTIONS.callingRelease.path, { companyId }).catch(() => undefined);
+
 type PanelState = {
   isLoading: boolean;
   lead: LeadCard | null;
-  nextDueAt: string | null;
   savedCall: SavedCall | null;
   message: string | null;
+};
+
+const INITIAL_STATE: PanelState = {
+  isLoading: true,
+  lead: null,
+  savedCall: null,
+  message: null,
 };
 
 const CallingPanel = () => {
   const [selectedRecordId] = useSelectedRecordIds();
   const companyId = selectedRecordId ?? null;
-  const isDialer = companyId === null;
   const palette = getCallingPalette(useColorScheme());
-  const [state, setState] = useState<PanelState>({
-    isLoading: true,
-    lead: null,
-    nextDueAt: null,
-    savedCall: null,
-    message: null,
-  });
+  const [state, setState] = useState<PanelState>(INITIAL_STATE);
   const [note, setNote] = useState('');
   const [isBusy, setIsBusy] = useState(false);
   const isBusyRef = useRef(false);
-  const skippedCompanyIdsRef = useRef<string[]>([]);
 
-  const loadLead = useCallback(async () => {
-    const response =
-      companyId !== null
-        ? await postCallingRoute(LOGIC_FUNCTIONS.callingLead.path, { companyId })
-        : await postCallingRoute(LOGIC_FUNCTIONS.callingNextLead.path, {
-            skipCompanyIds: skippedCompanyIdsRef.current,
-          });
+  useEffect(() => {
+    if (companyId === null) {
+      return;
+    }
 
-    setState((previous) => ({
-      ...previous,
-      isLoading: false,
-      lead: response.lead,
-      nextDueAt: response.nextDueAt,
-      message: response.status === 'rejected' ? response.message : null,
-    }));
+    setState(INITIAL_STATE);
+    setNote('');
+    postCallingRoute(LOGIC_FUNCTIONS.callingLead.path, { companyId, claim: true })
+      .then((response) =>
+        setState({
+          isLoading: false,
+          lead: response.lead,
+          savedCall: null,
+          message: response.status === 'rejected' ? response.message : null,
+        }),
+      )
+      .catch(() =>
+        setState({
+          ...INITIAL_STATE,
+          isLoading: false,
+          message: 'This lead could not be loaded. Refresh the page to try again.',
+        }),
+      );
+
+    return () => {
+      releaseLead(companyId);
+    };
   }, [companyId]);
 
   const runExclusive = async (action: () => Promise<void>) => {
@@ -110,30 +121,6 @@ const CallingPanel = () => {
       setIsBusy(false);
     }
   };
-
-  useEffect(() => {
-    loadLead().catch(() =>
-      setState((previous) => ({
-        ...previous,
-        isLoading: false,
-        message: 'The calling list could not be loaded. Refresh the page to try again.',
-      })),
-    );
-  }, [loadLead]);
-
-  const isPoolEmpty = isDialer && !state.isLoading && state.lead === null;
-
-  useEffect(() => {
-    if (!isPoolEmpty) {
-      return;
-    }
-
-    const interval = setInterval(() => {
-      loadLead().catch(() => undefined);
-    }, EMPTY_POOL_REFRESH_MS);
-
-    return () => clearInterval(interval);
-  }, [isPoolEmpty, loadLead]);
 
   const handleRejected = async (response: CallingResponse) => {
     await enqueueSnackbar({
@@ -184,12 +171,8 @@ const CallingPanel = () => {
       setState((previous) => ({
         ...previous,
         savedCall: response.savedCall,
-        lead: isDialer ? previous.lead : response.lead,
+        lead: response.lead,
       }));
-
-      if (isDialer) {
-        await loadLead();
-      }
     });
 
   const handleUndo = (callId: string) =>
@@ -200,12 +183,6 @@ const CallingPanel = () => {
         await handleRejected(response);
 
         return;
-      }
-
-      const shownLead = state.lead;
-
-      if (isDialer && shownLead !== null && shownLead.id !== response.lead?.id) {
-        await postCallingRoute(LOGIC_FUNCTIONS.callingRelease.path, { companyId: shownLead.id });
       }
 
       await enqueueSnackbar({ message: response.message ?? 'Call undone.', variant: 'success' });
@@ -238,34 +215,35 @@ const CallingPanel = () => {
       }));
     });
 
-  const handleSkip = () =>
+  const handleNextLead = () =>
     runExclusive(async () => {
-      const lead = state.lead;
-
-      if (lead === null) {
+      if (companyId === null) {
         return;
       }
 
-      skippedCompanyIdsRef.current = [...skippedCompanyIdsRef.current, lead.id];
-      await postCallingRoute(LOGIC_FUNCTIONS.callingRelease.path, { companyId: lead.id });
-      setNote('');
-      await loadLead();
-    });
+      await releaseLead(companyId);
 
-  const handleRefresh = () =>
-    runExclusive(async () => {
-      skippedCompanyIdsRef.current = [];
-      await loadLead();
-    });
+      const response = await postCallingRoute(LOGIC_FUNCTIONS.callingNextLead.path, {
+        skipCompanyIds: [companyId],
+      });
 
-  const handleOpenLead = () => {
-    if (state.lead !== null) {
+      if (response.lead === null) {
+        await enqueueSnackbar({
+          message:
+            response.nextDueAt !== null
+              ? `No other leads are ready to call. The next one comes back at ${formatTime(response.nextDueAt)}.`
+              : 'No other leads are ready to call right now.',
+          variant: 'info',
+        });
+
+        return;
+      }
+
       navigate(AppPath.RecordShowPage, {
         objectNameSingular: 'company',
-        objectRecordId: state.lead.id,
+        objectRecordId: response.lead.id,
       });
-    }
-  };
+    });
 
   const handleCopyPhone = async (phoneNumber: string) => {
     await copyToClipboard(phoneNumber);
@@ -281,7 +259,7 @@ const CallingPanel = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: 12,
-        maxWidth: 640,
+        maxWidth: 1100,
         width: '100%',
         margin: '0 auto',
         boxSizing: 'border-box',
@@ -301,9 +279,10 @@ const CallingPanel = () => {
             gap: 12,
             fontSize: 14,
             fontWeight: 600,
+            flexWrap: 'wrap',
           }}
         >
-          <span style={{ flex: 1 }}>Saved. {describeSavedCall(savedCall)}</span>
+          <span style={{ flex: 1, minWidth: 200 }}>Saved. {describeSavedCall(savedCall)}</span>
           {savedCall.canUndo && savedCall.callId !== null && (
             <button
               type="button"
@@ -322,10 +301,30 @@ const CallingPanel = () => {
               Undo
             </button>
           )}
+          <button
+            type="button"
+            disabled={isBusy}
+            onClick={handleNextLead}
+            style={{
+              border: 'none',
+              background: palette.success,
+              color: palette.card,
+              borderRadius: 8,
+              padding: '6px 14px',
+              fontWeight: 700,
+              cursor: 'pointer',
+            }}
+          >
+            Next lead →
+          </button>
         </div>
       )}
 
-      {state.isLoading ? (
+      {companyId === null ? (
+        <div style={{ color: palette.secondaryText, padding: 24, textAlign: 'center' }}>
+          Open a lead to call it.
+        </div>
+      ) : state.isLoading ? (
         <div style={{ color: palette.secondaryText, padding: 24, textAlign: 'center' }}>
           Loading…
         </div>
@@ -340,8 +339,7 @@ const CallingPanel = () => {
           onUndo={handleUndo}
           onReactivate={handleReactivate}
           onCopyPhone={handleCopyPhone}
-          onSkip={isDialer ? handleSkip : undefined}
-          onOpenLead={isDialer ? handleOpenLead : undefined}
+          onNextLead={handleNextLead}
         />
       ) : (
         <div
@@ -350,39 +348,11 @@ const CallingPanel = () => {
             borderRadius: 12,
             padding: 24,
             textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 10,
-            alignItems: 'center',
+            fontSize: 16,
+            fontWeight: 600,
           }}
         >
-          <div style={{ fontSize: 18, fontWeight: 700 }}>
-            {state.message ?? 'No leads are ready to call right now.'}
-          </div>
-          {isDialer && (
-            <>
-              <div style={{ fontSize: 14, color: palette.secondaryText }}>
-                {state.nextDueAt !== null
-                  ? `The next snoozed lead comes back at ${formatTime(state.nextDueAt)}.`
-                  : 'New leads appear here as soon as they are added.'}
-              </div>
-              <button
-                type="button"
-                disabled={isBusy}
-                onClick={handleRefresh}
-                style={{
-                  border: `1px solid ${palette.border}`,
-                  background: palette.card,
-                  color: palette.text,
-                  borderRadius: 8,
-                  padding: '8px 16px',
-                  cursor: 'pointer',
-                }}
-              >
-                Check again
-              </button>
-            </>
-          )}
+          {state.message ?? 'This lead could not be loaded.'}
         </div>
       )}
     </div>
@@ -393,7 +363,7 @@ export default defineFrontComponent({
   universalIdentifier: CALLING_PANEL_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER,
   name: 'calling-panel',
   description:
-    'Shows the lead to call with its call number and the Answered, No answer, Nurture and DNQ buttons.',
+    "Shows a lead's details with its call number and the Answered, No answer, Nurture and DNQ buttons.",
   component: CallingPanel,
   widgetAvailability: {
     pageLayoutType: PageLayoutType.RECORD_PAGE,

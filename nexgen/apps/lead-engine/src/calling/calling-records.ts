@@ -252,7 +252,11 @@ export const listPoolCandidates = async ({
           : []),
       ],
     },
-    orderBy: [{ lastCallAt: 'AscNullsFirst' }, { createdAt: 'AscNullsFirst' }],
+    orderBy: [
+      { leadPriority: 'DescNullsLast' },
+      { lastCallAt: 'AscNullsFirst' },
+      { createdAt: 'AscNullsFirst' },
+    ],
   });
 
 export const findOwnClaimedLead = async ({

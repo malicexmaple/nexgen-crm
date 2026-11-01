@@ -10,6 +10,7 @@ import {
   readWorkspaceMembers,
 } from 'src/calling/calling-records';
 import { REACTIVATABLE_STATUSES, UNDO_WINDOW_MINUTES } from 'src/calling/calling-rules';
+import { formatPhone, readLeadProfile } from 'src/calling/lead-profile';
 import { isNonEmptyString } from 'src/logic-functions/utils/guards';
 
 const RECENT_CALL_COUNT = 6;
@@ -39,20 +40,6 @@ export const canUndoCall = ({
   );
 };
 
-const formatPhone = (phone: CallingLead['phone']) => {
-  const number = phone?.primaryPhoneNumber?.trim() ?? '';
-
-  if (number.length === 0) {
-    return { phoneNumber: null, phoneHref: null };
-  }
-
-  const phoneNumber = number.startsWith('+')
-    ? number
-    : `${phone?.primaryPhoneCallingCode ?? ''} ${number}`.trim();
-
-  return { phoneNumber, phoneHref: `tel:${phoneNumber.replace(/[^\d+]/g, '')}` };
-};
-
 export const buildLeadCard = async ({
   client,
   lead,
@@ -64,11 +51,10 @@ export const buildLeadCard = async ({
   actor: CallingActor;
   now: Date;
 }): Promise<LeadCard> => {
-  const recentCalls = await listRecentLeadCalls({
-    client,
-    companyId: lead.id,
-    first: RECENT_CALL_COUNT,
-  });
+  const [recentCalls, profile] = await Promise.all([
+    listRecentLeadCalls({ client, companyId: lead.id, first: RECENT_CALL_COUNT }),
+    readLeadProfile({ client, companyId: lead.id }),
+  ]);
   const claimedByOther = isClaimedByOther(lead, actor.workspaceMemberId, now);
   const members = await readWorkspaceMembers({
     client,
@@ -120,5 +106,6 @@ export const buildLeadCard = async ({
       note: call.note || null,
       isUndone: call.undoneAt !== null,
     })),
+    profile,
   };
 };

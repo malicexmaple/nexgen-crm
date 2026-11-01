@@ -1,4 +1,5 @@
 import {
+  DateDisplayFormat,
   defineField,
   FieldType,
   MetadataWritability,
@@ -19,4 +20,5 @@ export default defineField({
   isNullable: true,
   writability: MetadataWritability.APPLICATION,
   isUIEditable: false,
+  universalSettings: { displayFormat: DateDisplayFormat.RELATIVE },
 });

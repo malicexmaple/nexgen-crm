@@ -15,7 +15,7 @@ export default defineField({
   name: 'callAttempt',
   label: 'Call attempt',
   description: 'The call this lead is on, 1 to 5.',
-  icon: 'IconPhone',
+  icon: 'IconRepeat',
   isNullable: false,
   defaultValue: 1,
   universalSettings: { decimals: 0 },

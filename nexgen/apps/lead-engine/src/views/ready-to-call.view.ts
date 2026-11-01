@@ -2,6 +2,7 @@ import {
   defineView,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
   ViewFilterOperand,
+  ViewOpenRecordIn,
   ViewSortDirection,
   ViewType,
 } from 'twenty-sdk/define';
@@ -30,7 +31,7 @@ const COLUMNS: [keyof typeof VIEW_FIELD_IDS, string, number?][] = [
   ['leadStatus', FIELD_IDS.leadStatus, 130],
 ];
 
-// Same rules as the calling panel's pool: Ready, has a phone, not Won or Lost.
+// Same leads as Next lead picks from: Ready, has a phone, not Won or Lost.
 // Never-called leads (no last call date) come first, oldest first.
 export default defineView({
   universalIdentifier: VIEW_UNIVERSAL_IDENTIFIERS.readyToCall,
@@ -40,6 +41,7 @@ export default defineView({
   objectUniversalIdentifier:
     STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier,
   type: ViewType.TABLE,
+  openRecordIn: ViewOpenRecordIn.RECORD_PAGE,
   fields: COLUMNS.map(([key, fieldMetadataUniversalIdentifier, size], position) => ({
     universalIdentifier: VIEW_FIELD_IDS[key],
     fieldMetadataUniversalIdentifier,

@@ -1,6 +1,7 @@
 import {
   defineView,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
+  ViewOpenRecordIn,
   ViewSortDirection,
   ViewType,
 } from 'twenty-sdk/define';
@@ -41,6 +42,7 @@ export default defineView({
   objectUniversalIdentifier:
     STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier,
   type: ViewType.TABLE,
+  openRecordIn: ViewOpenRecordIn.RECORD_PAGE,
   fields: COLUMNS.map(([key, fieldMetadataUniversalIdentifier, size], position) => ({
     universalIdentifier: VIEW_FIELD_IDS[key],
     fieldMetadataUniversalIdentifier,

@@ -1,5 +1,9 @@
 import { type SavedCall } from 'src/calling/calling-api-types';
-import { describeSavedCall } from 'src/front-components/calling-panel/calling-panel-text';
+import {
+  describeSavedCall,
+  formatBusinessType,
+  formatPrice,
+} from 'src/front-components/calling-panel/calling-panel-text';
 import { createRequestId } from 'src/front-components/calling-panel/create-request-id';
 
 const NOW = new Date(2026, 10, 2, 9, 0);
@@ -41,6 +45,22 @@ describe('describeSavedCall', () => {
     expect(
       describeSavedCall(saved({ outcome: 'DNQ', newStatus: 'DISQUALIFIED', nextCallAt: null }), NOW),
     ).toMatch(/will not come back/);
+  });
+});
+
+describe('formatBusinessType', () => {
+  it("turns Google's business type into words", () => {
+    expect(formatBusinessType('general_contractor')).toBe('General contractor');
+  });
+});
+
+describe('formatPrice', () => {
+  it('shows whole amounts in the quote currency', () => {
+    expect(formatPrice({ amount: 2300, currencyCode: 'AUD' })).toMatch(/2,300/);
+  });
+
+  it('falls back to the code when the currency is unknown', () => {
+    expect(formatPrice({ amount: 99.6, currencyCode: 'XYZ1' })).toBe('XYZ1 100');
   });
 });
 

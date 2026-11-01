@@ -1,5 +1,9 @@
 import { type LeadCard, type SavedCall } from 'src/calling/calling-api-types';
-import { type CallingStatus } from 'src/constants/select-options';
+import {
+  type CallingStatus,
+  LEAD_STATUS_OPTIONS,
+  type LeadStatus,
+} from 'src/constants/select-options';
 
 const isSameDay = (left: Date, right: Date) =>
   left.getFullYear() === right.getFullYear() &&
@@ -82,3 +86,25 @@ export const describeLeadStatus = (lead: LeadCard, now: Date = new Date()): stri
 };
 
 export const getStatusLabel = (status: CallingStatus): string => STATUS_LABELS[status];
+
+export const getLeadStatusLabel = (status: LeadStatus): string =>
+  LEAD_STATUS_OPTIONS.find((option) => option.value === status)?.label ?? status;
+
+// Google gives business types as identifiers such as "general_contractor".
+export const formatBusinessType = (businessType: string): string => {
+  const words = businessType.replace(/_/g, ' ').trim();
+
+  return words.charAt(0).toUpperCase() + words.slice(1);
+};
+
+export const formatPrice = ({ amount, currencyCode }: { amount: number; currencyCode: string }) => {
+  try {
+    return new Intl.NumberFormat(undefined, {
+      style: 'currency',
+      currency: currencyCode,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  } catch {
+    return `${currencyCode} ${Math.round(amount)}`;
+  }
+};

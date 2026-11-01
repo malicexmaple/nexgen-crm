@@ -5,11 +5,64 @@ import {
   compareAndSetLead,
   findOwnClaimedLead,
   isClaimableBy,
+  isClaimedByOther,
   listPoolCandidates,
+  readCallingLead,
 } from 'src/calling/calling-records';
 import { CALL_CLAIM_MINUTES } from 'src/calling/calling-rules';
 
 const CANDIDATES_PER_TRY = 10;
+
+const buildClaim = (workspaceMemberId: string, now: Date) => ({
+  callClaimedById: workspaceMemberId,
+  callClaimedUntil: new Date(now.getTime() + CALL_CLAIM_MINUTES * 60 * 1000).toISOString(),
+});
+
+const claimIfReady = ({
+  client,
+  companyId,
+  workspaceMemberId,
+  now,
+}: {
+  client: CoreApiClient;
+  companyId: string;
+  workspaceMemberId: string;
+  now: Date;
+}) =>
+  compareAndSetLead({
+    client,
+    companyId,
+    conditions: [{ callingStatus: { eq: 'READY' } }, isClaimableBy(workspaceMemberId, now)],
+    data: buildClaim(workspaceMemberId, now),
+  });
+
+// Opening a Ready lead holds it for this salesperson, so anyone else who opens
+// it sees who is calling and cannot record a call over them.
+export const claimLead = async ({
+  client,
+  lead,
+  workspaceMemberId,
+  now,
+}: {
+  client: CoreApiClient;
+  lead: CallingLead;
+  workspaceMemberId: string | null;
+  now: Date;
+}): Promise<CallingLead> => {
+  if (
+    workspaceMemberId === null ||
+    lead.callingStatus !== 'READY' ||
+    isClaimedByOther(lead, workspaceMemberId, now)
+  ) {
+    return lead;
+  }
+
+  if (await claimIfReady({ client, companyId: lead.id, workspaceMemberId, now })) {
+    return { ...lead, ...buildClaim(workspaceMemberId, now) };
+  }
+
+  return (await readCallingLead({ client, companyId: lead.id })) ?? lead;
+};
 
 // Holds the lead for this salesperson for a few minutes so nobody else's
 // calling screen shows it at the same time.
@@ -36,10 +89,6 @@ export const claimNextLead = async ({
     return candidate ?? null;
   }
 
-  const claim = {
-    callClaimedById: workspaceMemberId,
-    callClaimedUntil: new Date(now.getTime() + CALL_CLAIM_MINUTES * 60 * 1000).toISOString(),
-  };
   const ownLead = await findOwnClaimedLead({
     client,
     now,
@@ -58,15 +107,8 @@ export const claimNextLead = async ({
         });
 
   for (const candidate of candidates) {
-    const claimed = await compareAndSetLead({
-      client,
-      companyId: candidate.id,
-      conditions: [{ callingStatus: { eq: 'READY' } }, isClaimableBy(workspaceMemberId, now)],
-      data: claim,
-    });
-
-    if (claimed) {
-      return { ...candidate, ...claim };
+    if (await claimIfReady({ client, companyId: candidate.id, workspaceMemberId, now })) {
+      return { ...candidate, ...buildClaim(workspaceMemberId, now) };
     }
   }
 

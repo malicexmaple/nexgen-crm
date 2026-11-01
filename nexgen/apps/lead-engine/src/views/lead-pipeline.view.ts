@@ -2,6 +2,7 @@ import {
   AggregateOperations,
   defineView,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
+  ViewOpenRecordIn,
   ViewType,
 } from 'twenty-sdk/define';
 
@@ -31,6 +32,7 @@ export default defineView({
   objectUniversalIdentifier:
     STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier,
   type: ViewType.KANBAN,
+  openRecordIn: ViewOpenRecordIn.RECORD_PAGE,
   mainGroupByFieldMetadataUniversalIdentifier: FIELD_IDS.leadStatus,
   kanbanAggregateOperation: AggregateOperations.SUM,
   kanbanAggregateOperationFieldMetadataUniversalIdentifier: FIELD_IDS.estimatedPrice,

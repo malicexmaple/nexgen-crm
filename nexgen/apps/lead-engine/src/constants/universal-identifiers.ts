@@ -197,9 +197,7 @@ export const CALLING_PANEL_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER =
 
 export const CALLING_PAGE_LAYOUT_UNIVERSAL_IDENTIFIERS = {
   pageLayout: 'f687d79d-729c-4f9f-bbb0-df9c8b35b738',
-  callTab: 'ba3d11f9-2880-4eec-8782-bc206b25a34f',
   reportsTab: '31d446e3-38f9-4cbf-87bd-e97890ef00db',
-  callingPanelWidget: '0f9e39fb-517e-402d-a021-f248a839528a',
   companyCallTab: '2bcc0af8-ed9e-4b14-a4e1-ebb31cc8c032',
   companyCallTabWidget: '442543ac-77e4-4905-9ade-afa7eaca2a54',
 } as const;
@@ -224,6 +222,7 @@ export const VIEW_UNIVERSAL_IDENTIFIERS = {
   spokenTo: 'a989ed04-3b7e-437f-a5fb-e21d512e0cf0',
   nurture: '4383f435-dc40-4aa1-80dd-16a3d3cac5ac',
   disqualified: '31830bfd-a0ec-4c4f-b5bc-a7ea0a6c560e',
+  leadPool: 'bd5b69de-bc5a-4c4b-b7f2-2665a9a32fe4',
 } as const;
 
 export const READY_TO_CALL_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
@@ -281,6 +280,7 @@ export const CALLING_VIEW_FILTER_UNIVERSAL_IDENTIFIERS = {
   spokenToStatus: '07cd6f6a-00a9-42e1-a053-743208d1e8a0',
   nurtureStatus: '5043aad9-3094-43b0-b77c-f9319fb934f3',
   disqualifiedStatus: 'fad4d4f3-0bf8-4f5b-befa-b9053dc280c9',
+  leadPoolPhone: 'befce74d-6094-4db6-aeea-81fdb4968cc2',
 } as const;
 
 export const CALLING_VIEW_SORT_UNIVERSAL_IDENTIFIERS = {
@@ -289,6 +289,7 @@ export const CALLING_VIEW_SORT_UNIVERSAL_IDENTIFIERS = {
   spokenToAnsweredAt: '39144b85-04bc-4d06-b73b-57555199399d',
   nurtureNextCallAt: 'bf45a7f9-239a-49d9-a4b1-ce5ef18025ce',
   disqualifiedDnqAt: 'e9fcacd8-68a0-4bf5-908c-8ab87a81affa',
+  leadPoolLeadPriority: 'fa34ad77-9a49-4474-848d-be0ab959c935',
 } as const;
 
 export const CALL_QUEUE_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
@@ -329,6 +330,25 @@ export const LEAD_PIPELINE_VIEW_GROUP_UNIVERSAL_IDENTIFIERS = {
   LOST: '1abadb9d-fd79-4cde-b3c7-2756984b3a51',
 } as const;
 
+export const LEAD_POOL_VIEW_FIELD_UNIVERSAL_IDENTIFIERS = {
+  name: 'c20547d6-4db2-4437-92c6-142cd50e9b2f',
+  phone: '689fd757-f3b5-4787-aef7-729fa60fc8f6',
+  callAttempt: '339f4a28-473a-4659-9a4f-2ca8e864d74e',
+  nextCallAt: '40703709-ead0-49b1-a85b-c058a182a7a0',
+  lastCallAt: '413bc9b3-ad22-4a02-955f-df29cfb41e86',
+  lastCallOutcome: '1b5b0e9e-bb6e-45ed-9b0c-0ab7555d6dd8',
+  lastCalledBy: '3d1e885a-aae0-4c7a-8b38-d313d0209658',
+  leadPriority: '49c18333-682b-461d-b253-16754abf8760',
+} as const;
+
+export const LEAD_POOL_VIEW_GROUP_UNIVERSAL_IDENTIFIERS = {
+  READY: 'a5e4cd95-ef5b-44fc-b3fd-956a77ac4dcd',
+  SNOOZED: 'f459bc31-f292-43a0-8ab3-1d3ee9ea7279',
+  NURTURE: '89a7cf11-2a13-4148-b8c2-72c9c38ec4a4',
+  SPOKEN_TO: '665794fc-9c5f-4867-a116-79ff9fb51bea',
+  DISQUALIFIED: 'b8aebee9-54ca-4172-85b1-7cbb00b426ea',
+} as const;
+
 export const CALL_QUEUE_SORT_UNIVERSAL_IDENTIFIER =
   'ebed4e35-0501-41e0-8372-12ae215ca93a';
 
@@ -342,4 +362,5 @@ export const NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIERS = {
   nurture: 'f85d102a-fa00-43cf-8283-59709bb5d6c8',
   disqualified: 'c533f87c-3a8c-4b2b-aead-aaa7d32ead99',
   callHistory: 'd4e5fde1-8db4-4291-adda-90f4c2c70d15',
+  leadPool: '44c5d17b-0f61-4d53-8d43-8327f70de164',
 } as const;

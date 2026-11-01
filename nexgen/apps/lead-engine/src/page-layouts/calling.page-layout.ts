@@ -8,7 +8,6 @@ import {
 import { DEFAULT_CALLING_TIME_ZONE } from 'src/constants/settings';
 import {
   CALLING_PAGE_LAYOUT_UNIVERSAL_IDENTIFIERS as LAYOUT_IDS,
-  CALLING_PANEL_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER,
   CALLING_REPORT_WIDGET_UNIVERSAL_IDENTIFIERS as WIDGET_IDS,
   COMPANY_FIELD_UNIVERSAL_IDENTIFIERS as COMPANY_FIELD_IDS,
   LEAD_CALL_FIELD_UNIVERSAL_IDENTIFIERS as LEAD_CALL_FIELD_IDS,
@@ -109,32 +108,13 @@ const callsBarChartWidget = (
 
 export default definePageLayout({
   universalIdentifier: LAYOUT_IDS.pageLayout,
-  name: 'Calling',
+  name: 'Calling reports',
   type: 'STANDALONE_PAGE',
   tabs: [
     {
-      universalIdentifier: LAYOUT_IDS.callTab,
-      title: 'Call',
-      position: 0,
-      icon: 'IconPhoneCall',
-      layoutMode: PageLayoutTabLayoutMode.VERTICAL_LIST,
-      widgets: [
-        {
-          universalIdentifier: LAYOUT_IDS.callingPanelWidget,
-          title: 'Calling',
-          type: 'FRONT_COMPONENT',
-          heightBehavior: 'TAB_VIEWPORT',
-          configuration: {
-            configurationType: 'FRONT_COMPONENT',
-            frontComponentUniversalIdentifier: CALLING_PANEL_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER,
-          },
-        },
-      ],
-    },
-    {
       universalIdentifier: LAYOUT_IDS.reportsTab,
       title: 'Reports',
-      position: 1,
+      position: 0,
       icon: 'IconChartBar',
       layoutMode: PageLayoutTabLayoutMode.GRID,
       widgets: [
