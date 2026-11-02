@@ -44,13 +44,23 @@ A Twenty app that turns Google Maps into a cold-call list:
 
 ## Installing on the live CRM
 
-Sign in to the CRM, create an API key (Settings → Developers → API keys, role Admin), then from Windows PowerShell:
+A deploy replaces whatever is live, so always deploy the latest GitHub `main`: commit and push your changes first. The deploy script checks this and stops if anything is not on GitHub.
 
-```powershell
-wsl -u root -- bash /mnt/c/Users/R9AMD/nexgen-crm/nexgen/apps/lead-engine/scripts/install-on-railway.sh
+One-time setup on each PC, in Ubuntu (WSL):
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo corepack enable
 ```
 
-Copy the key, then press Enter when it asks: it reads the key from the Windows clipboard (falling back to a hidden paste prompt), installs the app, and on later runs just updates it.
+To deploy, from Windows PowerShell in the `nexgen-crm` folder:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File nexgen\apps\lead-engine\scripts\deploy.ps1
+```
+
+Add `-CheckOnly` to see what would be deployed without deploying. The first time on a PC, it asks for an API key: create one in the CRM under Settings → Developers (role Admin), copy it and press Enter. It reads the key from the Windows clipboard and saves it. It should end with "Lead engine updated."
 
 ## Developing
 

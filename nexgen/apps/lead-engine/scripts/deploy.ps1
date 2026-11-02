@@ -40,6 +40,8 @@ if ($CheckOnly) {
 }
 
 Write-Host "Deploying $version"
-$installScript = (wsl -u root -- wslpath -a "$PSScriptRoot\install-on-railway.sh").Trim()
-wsl -u root -- bash $installScript
+# WSL drops backslashes from arguments, so hand it the path with forward slashes.
+$installScript = wsl -u root -- wslpath -a (($PSScriptRoot -replace '\\', '/') + '/install-on-railway.sh')
+if (-not $installScript) { Stop-Deploy 'WSL is not set up. See "Installing on the live CRM" in the lead engine README.' }
+wsl -u root -- bash $installScript.Trim()
 exit $LASTEXITCODE
